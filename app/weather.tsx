@@ -36,6 +36,7 @@ type ForecastSlot = {
     temperature: number;
     description: string;
     windSpeed: number; // Ajout de la vitesse du vent
+    windDirection: number; // Ajout de la direction du vent en degrés
 };
 
 // Retourne la date au format "YYYY-MM-DD" pour un décalage en jours donné
@@ -282,6 +283,11 @@ export default function Weather() {
                     style={{ marginVertical: 8, borderRadius: 16 }}
                 />
             )}
+            <View style={[styles.arrowDirection]}>
+                <Text style={[styles.arrowDescription]}>
+                    Direction du vent
+                </Text>
+            </View>
 
         </ScrollView>
     );
@@ -389,6 +395,15 @@ const styles = StyleSheet.create({
         fontStyle: 'italic',
         letterSpacing: 0.5,
         textTransform: 'capitalize',
+    },
+    arrowDirection: {
+        marginTop: 16,
+        width: '100%',
+    },
+    arrowDescription: {
+        fontSize: 16,
+        fontWeight: '600',
+        textAlign: 'center',
     },
     
 });
