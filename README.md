@@ -7,7 +7,7 @@ Application mobile météo développée avec React Native et Expo. Elle affiche 
 - Météo actuelle (température, ressenti, humidité, description)
 - Prévisions par tranches de 3h sur 5 jours
 - Graphique d'évolution de la température avec échelle fixe sur la semaine
-- Vitesse et direction du vent ( en developpement )
+- Vitesse et direction du vent
 - Navigation entre les jours
 - Support du mode clair / sombre
 
