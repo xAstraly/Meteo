@@ -16,7 +16,8 @@ import { LineChart } from 'react-native-chart-kit';
 const largeur = Dimensions.get('window').width - 48;
 
 // Clé API OpenWeatherMap
-const API_KEY = '6d68c118767a9d906b478c77ff7d7225'; // openweathermap.org
+const API_KEY = process.env.EXPO_PUBLIC_API_KEY;
+
 
 // L'API gratuite donne 5 jours de prévisions (aujourd'hui + 4 suivants)
 const MAX_DAY_OFFSET = 4;
