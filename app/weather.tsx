@@ -13,6 +13,7 @@ import { useColorScheme } from '@/hooks/use-color-scheme';
 
 import { LineChart } from 'react-native-chart-kit';
 
+
 const largeur = Dimensions.get('window').width - 48;
 
 // Clé API OpenWeatherMap
@@ -170,6 +171,12 @@ export default function Weather() {
 
     const todayDate = new Date().toLocaleDateString('fr-FR', { weekday: 'long', month: 'long', day: 'numeric' });
 
+    const getWindDirectionLabel = (deg: number): string => {
+        const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+        const index = Math.round(deg / 45) % 8;
+        return directions[index];
+    }
+
     return (
         <ScrollView
             style={{ backgroundColor: colors.background }}
@@ -191,6 +198,7 @@ export default function Weather() {
                 <Text style={[styles.detail, { color: colors.icon }]}>
                     Humidité : {weather?.humidity}%
                 </Text>
+
             </View>
 
             {/* --- PRÉVISIONS AVEC NAVIGATION PAR JOUR --- */}
@@ -241,7 +249,7 @@ export default function Weather() {
                                         {slot.description}
                                     </Text>
                                     <Text style={[styles.slotWind, { color: colors.icon }]}>
-                                        {Math.round(slot.windSpeed)} km/h
+                                        {Math.round(slot.windSpeed)} km/h · {getWindDirectionLabel(slot.windDirection)}
                                     </Text>
                                 </View>
                             ))}
@@ -285,11 +293,7 @@ export default function Weather() {
                     style={{ marginVertical: 8, borderRadius: 16 }}
                 />
             )}
-            <View style={[styles.arrowDirection]}>
-                <Text style={[styles.arrowDescription]}>
-                    Direction du vent
-                </Text>
-            </View>
+            
 
         </ScrollView>
     );
@@ -398,14 +402,8 @@ const styles = StyleSheet.create({
         letterSpacing: 0.5,
         textTransform: 'capitalize',
     },
-    arrowDirection: {
-        marginTop: 16,
-        width: '100%',
-    },
-    arrowDescription: {
+    windDirection: {
         fontSize: 16,
         fontWeight: '600',
-        textAlign: 'center',
     },
-    
 });
