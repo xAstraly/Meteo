@@ -1,50 +1,46 @@
-# Welcome to your Expo app 👋
+# Application Météo — React Native / Expo
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Application mobile météo développée avec React Native et Expo. Elle affiche la météo en temps réel ainsi que les prévisions sur 5 jours à partir de la position GPS de l'utilisateur.
 
-## Get started
+## Fonctionnalités
 
-1. Install dependencies
+- Météo actuelle (température, ressenti, humidité, description)
+- Prévisions par tranches de 3h sur 5 jours
+- Graphique d'évolution de la température avec échelle fixe sur la semaine
+- Vitesse et direction du vent
+- Navigation entre les jours
+- Support du mode clair / sombre
 
-   ```bash
-   npm install
-   ```
+## Stack technique
 
-2. Start the app
+- [React Native](https://reactnative.dev/) avec [Expo](https://expo.dev)
+- [Expo Router](https://docs.expo.dev/router/introduction/) pour la navigation (file-based routing)
+- [expo-location](https://docs.expo.dev/versions/latest/sdk/location/) pour la géolocalisation
+- [react-native-chart-kit](https://github.com/indiespirit/react-native-chart-kit) pour les graphiques
+- [OpenWeatherMap API](https://openweathermap.org/api) pour les données météo
 
-   ```bash
-   npx expo start
-   ```
+## Installation
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+1. Cloner le projet et installer les dépendances
 
 ```bash
-npm run reset-project
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+2. Créer un fichier `.env` à la racine avec ta clé API OpenWeatherMap
 
-## Learn more
+```
+EXPO_PUBLIC_API_KEY=ta_clé_ici
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+3. Lancer l'application
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+npx expo start
+```
 
-## Join the community
+## Variables d'environnement
 
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+| Variable | Description |
+|---|---|
+| `EXPO_PUBLIC_API_KEY` | Clé API OpenWeatherMap (gratuite sur openweathermap.org) |

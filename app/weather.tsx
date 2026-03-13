@@ -91,38 +91,39 @@ export default function Weather() {
 
             const location = await Location.getCurrentPositionAsync({});
             const { latitude, longitude } = location.coords;
+            
+            
+            let weatherData = null;
+            let forecastData = null;
 
-            // --- APPEL 1 : météo actuelle ---
-            const currentResponse = await fetch(
-                `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric&lang=fr`
-            );
-            const currentData = await currentResponse.json();
-
-            if (currentData.cod !== 200) {
-                setError('Clé API invalide ou erreur réseau');
+            try {
+                const response = await fetch (`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric&lang=fr`);
+                weatherData = await response.json();
+            } catch (e) {
+                setError('Erreur lors de la récupération de la météo actuelle');
                 setLoading(false);
                 return;
             }
 
+            try {
+                const response = await fetch (`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric&lang=fr`);
+                forecastData = await response.json();
+            } catch (e) {
+                setError('Erreur lors de la récupération des prévisions');
+                setLoading(false);
+                return;
+            }
+            
+            if (!weatherData || !forecastData) return;
             setWeather({
-                city: currentData.name,
-                temperature: Math.round(currentData.main.temp),
-                description: currentData.weather[0].description,
-                humidity: currentData.main.humidity,
-                feelsLike: Math.round(currentData.main.feels_like),
+                city: weatherData.name,
+                temperature: Math.round(weatherData.main.temp),
+                description: weatherData.weather[0].description,
+                humidity: weatherData.main.humidity,
+                feelsLike: Math.round(weatherData.main.feels_like),
             });
 
-            // --- APPEL 2 : toutes les prévisions (5 jours, tranches de 3h) ---
-            const forecastResponse = await fetch(
-                `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric&lang=fr`
-            );
-            const forecastData = await forecastResponse.json();
 
-            // --- APPEL 3 : données de vent (optionnel, pour enrichir les créneaux) ---
-            const WindResponse = await fetch(
-                `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&units=metric&lang=fr`
-            );
-            const WindData = await WindResponse.json();
 
 
             
